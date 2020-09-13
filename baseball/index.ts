@@ -26,7 +26,6 @@ const chooseNumber=(a?:number,b?): void => {
     for (let i:number=0;i<4;i++) {
         canditate.push(Math.floor(Math.random()*numberLength));
     }
-    console.log('Candidate:',canditate);
 }
 
 form.addEventListener('submit',(e)=>{
@@ -36,21 +35,19 @@ form.addEventListener('submit',(e)=>{
     let ball = 0;
     let value = input.value;
     if (count<10) {
-        console.log('Canditate:',canditate)
-        console.log('value:',value)
         if (canditate.join('') === value) {
             resultDiv.textContent='홈런!'
             count = 0;
             canditate=[];
             chooseNumber()
         } else {
-            console.log('Cando:',canditate)
             canditate.forEach((v,i)=>{
-                strike = String(v) === value[i] ? strike+1 : strike;
-                canditate.splice(canditate.indexOf(v),1);
-                ball = value.indexOf(String(v)) > -1 ? ball+1 : ball;
+                if (String(v) === value[i]) {
+                    strike+=1;
+                } else {
+                    ball = value.indexOf(String(v)) > -1 ? ball+=1 : ball;
+                }
             })        
-            console.log('Strike:',strike,'ball:',ball);
             resultDiv.textContent=`${strike} 스트라이크, ${ball}볼입니다.`
             count++;
         }

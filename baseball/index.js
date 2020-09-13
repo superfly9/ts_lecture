@@ -20,7 +20,6 @@ var chooseNumber = function (a, b) {
     for (var i = 0; i < 4; i++) {
         canditate.push(Math.floor(Math.random() * numberLength));
     }
-    console.log('Candidate:', canditate);
 };
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -29,8 +28,6 @@ form.addEventListener('submit', function (e) {
     var ball = 0;
     var value = input.value;
     if (count < 10) {
-        console.log('Canditate:', canditate);
-        console.log('value:', value);
         if (canditate.join('') === value) {
             resultDiv.textContent = '홈런!';
             count = 0;
@@ -38,13 +35,14 @@ form.addEventListener('submit', function (e) {
             chooseNumber();
         }
         else {
-            console.log('Cando:', canditate);
             canditate.forEach(function (v, i) {
-                strike = String(v) === value[i] ? strike + 1 : strike;
-                canditate.splice(canditate.indexOf(v), 1);
-                ball = value.indexOf(String(v)) > -1 ? ball + 1 : ball;
+                if (String(v) === value[i]) {
+                    strike += 1;
+                }
+                else {
+                    ball = value.indexOf(String(v)) > -1 ? ball += 1 : ball;
+                }
             });
-            console.log('Strike:', strike, 'ball:', ball);
             resultDiv.textContent = strike + " \uC2A4\uD2B8\uB77C\uC774\uD06C, " + ball + "\uBCFC\uC785\uB2C8\uB2E4.";
             count++;
         }
