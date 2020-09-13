@@ -45,7 +45,34 @@ const foo = (a:number,b:number): number =>{
     return a+b
 }
 
-//리턴값이 없다면(undefined) void를 명시해줘야
+//리턴값이 undefined라면 void를 명시해줘야
 const foo2 = (a:number,b:number):void =>{
     console.log(a+b)
+}
+const fooo2 = (a:number,b:number):void =>{
+    return 
+}
+
+//함수를 리턴값으로 가질 때
+// (c:string)=>string => 함수 foo3의 return 값이 (c:string)을 인수로 받고 string을 return하는 함수임을 명시
+const foo3 = (a:string,b:string):(c:string)=>string => {
+    return (c:string)=>{
+        return a+b
+    }
+}
+
+//함수 안의 함수가 다시 함수를 리턴할 때.이걸 보고 있으니 눈이 좀 아픈 것 같다
+const foo4 = (a:string,b:string):(c:string)=>(d:string)=>string => {
+    return (c:string)=>{
+        return (d:string)=>{
+            return d
+        }
+    }
+}
+//객체의 method
+const obj4:{a:(b:string,c?:number)=>number } = {
+    //a라는 method는 (b,c)를 인자로 받고 number를 리턴하는 함수
+    a : (b:string,c?:number)=>{
+        return c ? c : 100
+    }
 }
