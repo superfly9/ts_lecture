@@ -76,3 +76,17 @@ const obj4:{a:(b:string,c?:number)=>number } = {
         return c ? c : 100
     }
 }
+
+//강제 형변환(남이 만들어놓은 타입을 내가 원하는 타입으로 바꾸고 싶을 때)
+const num: number = 10;
+
+//방법1-> 변수 선언 후 형변환시 () 안 붙임
+const newStr = num as unknown as string;//type:string으로 형변환 (바꾸려는 것과 바꾸고자 하는 것 사이에 어떤 부모-자식 관계도 없으면 as unknown붙여줘야)
+
+const div = document.createElement('div') //type: HTMLDivElement
+const a = div as HTMLElement; //type:HTMLElement로 형변환 (바꾸려는 대상과 바꾸고자하는 것 사이의 부모-자식 사이면 as를 1번만 붙이면 된다)
+
+//방법2-> 변수 선언없이 형변환시 ()붙여서 실행
+const hello: boolean = false;
+(hello as unknown as string).substring(0);
+(<string><unknown>hello).substring(0);
