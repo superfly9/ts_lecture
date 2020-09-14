@@ -1,6 +1,11 @@
 // 필요한 것->내선택 / 컴퓨터 선택 / 선택 - 좌표 / 선택 - 점수 / 인터벌 
-let imgCoords = '0';
-let RSP = {
+let imgCoords:RSP[keyof RSP] = '0';
+interface RSP {
+  rock:'0',
+  scissors:'-142px',
+  paper:'-284px'
+}
+let RSP:RSP={
   rock:'0',
   scissors:'-142px',
   paper:'-284px'
@@ -33,7 +38,7 @@ document.querySelectorAll('.btn').forEach(btn=>{
 
     clearInterval(interval);
     setTimeout(makeInterval,2000);
-    const myChoice = this.textContent as 'rock'|'scissors'|'paper';
+    const myChoice = this.textContent as keyof RSP;
     const myScore  = score[myChoice];
     const computerChoice = (Object.keys(RSP) as ['rock','scissors','paper']).find(v=>RSP[v] === imgCoords)!
     const computerScore = score[computerChoice];
