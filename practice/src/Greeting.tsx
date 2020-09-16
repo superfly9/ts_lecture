@@ -5,7 +5,7 @@ type GreetingProps = {
     name : string,
     hobby:number,
     goal?:string,
-    onClick:({월,일}:{월:number,일:number})=>string //return이 undefined일때
+    onClick:({월,일}:{월:number,일:number})=>string
 }
 
 function Greeting ({name,hobby,goal,onClick}:GreetingProps) {
