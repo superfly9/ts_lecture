@@ -11,7 +11,7 @@ type GreetingProps = {
 function Greeting ({name,hobby,goal,onClick}:GreetingProps) {
     const [today,setToday] = useState('');
     const [showDate,setShowDate] = useState(false);
-    console.log('name:',name,'hobby:',hobby,'goal:',goal,'onClick:',onClick);    
+    console.log('name:',name,'hobby:',hobby,'goal:',goal);    
     const handleClick = ()=>{
         setShowDate(!showDate)
         setToday(onClick({월:new Date().getMonth()+1,일:new Date().getDate()}))
@@ -20,7 +20,7 @@ function Greeting ({name,hobby,goal,onClick}:GreetingProps) {
         <div style={{padding:'100px'}}>
             <p>Hello, 나는 {name}</p>
             <p>좋아한다 {hobby}</p>
-            {goal && <p>{goal}이 나의 목표</p>}``
+            {goal && <p>{goal}이 나의 목표</p>}
             <div style={{marginTop:'20px'}}>
                 <button onClick={handleClick}>눌러눌러!</button>
             </div>
