@@ -2,7 +2,7 @@
 //1.숫자
 let firstNumber: number =3;
 let secondNumber: number;
-secondNumber = 10; //이건 ok
+secondNumber = 10; //옳은 타입 값으로 재할당,이건 ok
 //secondNumber = 'string'(x) 숫자가 들어가야
 
 //2.문자
@@ -84,7 +84,7 @@ const num: number = 10;
 const newStr = num as unknown as string;//type:string으로 형변환 (바꾸려는 것과 바꾸고자 하는 것 사이에 어떤 부모-자식 관계도 없으면 as unknown붙여줘야)
 
 const div = document.createElement('div') //type: HTMLDivElement
-const a = div as HTMLElement; //type:HTMLElement로 형변환 (바꾸려는 대상과 바꾸고자하는 것 사이의 부모-자식 사이면 as를 1번만 붙이면 된다)
+const a1 = div as HTMLElement; //type:HTMLElement로 형변환 (바꾸려는 대상과 바꾸고자하는 것 사이의 부모-자식 사이면 as를 1번만 붙이면 된다)
 
 //방법2-> 변수 선언없이 형변환시 ()붙여서 실행
 const hello: boolean = false;

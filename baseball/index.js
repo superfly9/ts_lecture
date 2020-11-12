@@ -1,32 +1,33 @@
-var body = document.body;
-var canditate = [];
-var result = [];
+"use strict";
+const { body } = document;
+let canditate = [];
+let result = [];
 // 시작할 창 - 전송할 폼-입력 창-버튼 - 결과창
-var h2 = document.createElement('h2');
+const h2 = document.createElement('h2');
 h2.textContent = 'ts 야구게임';
 body.appendChild(h2);
-var form = document.createElement('form');
-var input = document.createElement('input');
-var button = document.createElement('button');
-var resultDiv = document.createElement('div');
+const form = document.createElement('form');
+const input = document.createElement('input');
+const button = document.createElement('button');
+const resultDiv = document.createElement('div');
 button.textContent = '제출';
 form.appendChild(input);
 form.appendChild(button);
 body.appendChild(form);
 body.appendChild(resultDiv);
 //후보 뽑기
-var chooseNumber = function (a, b) {
-    var numberLength = 10;
-    for (var i = 0; i < 4; i++) {
+const chooseNumber = (a, b) => {
+    let numberLength = 10;
+    for (let i = 0; i < 4; i++) {
         canditate.push(Math.floor(Math.random() * numberLength));
     }
 };
-form.addEventListener('submit', function (e) {
+form.addEventListener('submit', (e) => {
     e.preventDefault();
-    var count = 0;
-    var strike = 0;
-    var ball = 0;
-    var value = input.value;
+    let count = 0;
+    let strike = 0;
+    let ball = 0;
+    let value = input.value;
     if (count < 10) {
         if (canditate.join('') === value) {
             resultDiv.textContent = '홈런!';
@@ -35,7 +36,7 @@ form.addEventListener('submit', function (e) {
             chooseNumber();
         }
         else {
-            canditate.forEach(function (v, i) {
+            canditate.forEach((v, i) => {
                 if (String(v) === value[i]) {
                     strike += 1;
                 }
@@ -43,7 +44,7 @@ form.addEventListener('submit', function (e) {
                     ball = value.indexOf(String(v)) > -1 ? ball += 1 : ball;
                 }
             });
-            resultDiv.textContent = strike + " \uC2A4\uD2B8\uB77C\uC774\uD06C, " + ball + "\uBCFC\uC785\uB2C8\uB2E4.";
+            resultDiv.textContent = `${strike} 스트라이크, ${ball}볼입니다.`;
             count++;
         }
     }

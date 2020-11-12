@@ -1,19 +1,19 @@
 "use strict";
 // 필요한 것->내선택 / 컴퓨터 선택 / 선택 - 좌표 / 선택 - 점수 / 인터벌 
-var imgCoords = '0';
-var RSP = {
+let imgCoords = '0';
+let RSP = {
     rock: '0',
     scissors: '-142px',
     paper: '-284px'
 };
-var score = {
+let score = {
     rock: 0,
     scissors: 1,
     paper: -1
 };
-var interval;
-var makeInterval = function () {
-    interval = setInterval(function () {
+let interval;
+let makeInterval = () => {
+    interval = setInterval(() => {
         if (imgCoords === RSP.rock) {
             imgCoords = RSP.scissors;
         }
@@ -23,24 +23,24 @@ var makeInterval = function () {
         else {
             imgCoords = RSP.rock;
         }
-        var computerDiv = document.querySelector('#computer');
+        let computerDiv = document.querySelector('#computer');
         computerDiv.style.height = '200px';
         computerDiv.style.width = '142px';
-        computerDiv.style.background = "url(https://en.pimg.jp/023/182/267/1/23182267.jpg) " + imgCoords + " 0";
+        computerDiv.style.background = `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoords} 0`;
     }, 500);
 };
 makeInterval();
-document.querySelectorAll('.btn').forEach(function (btn) {
+document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('click', function () {
         clearInterval(interval);
         setTimeout(makeInterval, 2000);
-        var myChoice = this.textContent;
-        var myScore = score[myChoice];
-        var computerChoice = Object.keys(RSP).find(function (v) { return RSP[v] === imgCoords; });
-        var computerScore = score[computerChoice];
-        var diff = myScore - computerScore;
-        var resultDiv = document.getElementById('result');
-        var result = '';
+        const myChoice = this.textContent;
+        const myScore = score[myChoice];
+        const computerChoice = Object.keys(RSP).find(v => RSP[v] === imgCoords);
+        const computerScore = score[computerChoice];
+        const diff = myScore - computerScore;
+        const resultDiv = document.getElementById('result');
+        let result = '';
         switch (diff) {
             case 0:
                 result = '비겼습니다.';
@@ -55,11 +55,11 @@ document.querySelectorAll('.btn').forEach(function (btn) {
                 result = '졌습니다.';
         }
         console.log(result);
-        resultDiv.textContent = "\uACB0\uACFC:" + result;
+        resultDiv.textContent = `결과:${result}`;
     });
 });
-var start = 3;
-var interval2 = setInterval(function () {
+let start = 3;
+const interval2 = setInterval(function () {
     if (start === 0) {
         console.log('종료!!!');
         return clearInterval(interval2);
