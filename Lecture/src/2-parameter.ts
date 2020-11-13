@@ -8,7 +8,7 @@ export {};
 //함수 리턴 타입을 정의
 function add (x:string,y:string):string;
 function add (x:number,y:number):number;
-function add (x:number|string,y:number|string):number|string  {
+function add (x: number| string ,y: number | string): number | string  {
     if (typeof x === 'number' && typeof y === 'number') {
         return x+y;
     } else {
@@ -17,6 +17,6 @@ function add (x:number|string,y:number|string):number|string  {
     }
 }
 
-const v1:number = add(10,20);
-const v2:string = add('1','2');
-const v3 = add(1,'10');
+const v1:number | string = add(10,20);
+const v2:number | string = add('1','2');
+const v3:number | string = add(1,'10');
