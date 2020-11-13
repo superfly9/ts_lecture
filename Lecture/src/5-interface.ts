@@ -95,3 +95,6 @@ const pp : PP = {
     age:10,
     favoriteProgram:'js',
 }
+
+// extends 같은 종류끼리 상속할 때(class - class / interface - interface)
+// implements 다른 종류끼리 상속할 때 (class A implements B(B is interface) ) 
