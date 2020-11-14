@@ -56,7 +56,7 @@ function foo1 ( a = 'seoul', b:number)  {
     return `${a} ${b}`; // string
 } // foo1 (a: string | undefined, b : number) : string
 
-foo1(10,50)// 10은 number이기에 들어갈수 X
+foo1(undefined,50)// 10은 number이기에 들어갈수 X
 
 const result1 : number = foo1('seoul Lite', 500); //return값 타입 다르기에 오류
 
