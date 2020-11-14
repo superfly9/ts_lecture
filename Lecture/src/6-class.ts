@@ -42,6 +42,9 @@ class Seoul {
   static location='Korea';
   // constructor에 범위 설정 keyword / readonly사용시 자동으로 클래스의 멤버 변수로 사용 가능
   constructor(public name:string,readonly age:number) {}
+  static getInfo (location:string) {
+      return `Seoul is in ${Seoul.location}`
+  }
 }
 
 const city = new Seoul('seoul Lite',500);
