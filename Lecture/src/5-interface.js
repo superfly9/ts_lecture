@@ -29,5 +29,8 @@ const pp = {
     age: 10,
     favoriteProgram: "js",
 };
-// extends 같은 종류끼리 상속할 때(class - class / interface - interface)
-// implements 다른 종류끼리 상속할 때 (class A implements B(B is interface) )
+let obj = { cssFile: /\.css$/, jsFile: /\.js$/ };
+// 자동적으로 키 값이 string으로 추론됨
+Object.keys(obj).forEach((v) => {
+    console.log(v);
+});

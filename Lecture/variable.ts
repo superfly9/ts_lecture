@@ -1,92 +1,108 @@
 //변수 타입 정의시 Number,String...은 객체를 의미하므로 number,string처럼 소문자로 시작해야
 //1.숫자
-let firstNumber: number =3;
+let firstNumber: number = 3;
 let secondNumber: number;
 secondNumber = 10; //옳은 타입 값으로 재할당,이건 ok
 //secondNumber = 'string'(x) 숫자가 들어가야
 
 //2.문자
-let str: string = 'Seoul';
+let str: string = "Seoul";
 let str2: string = firstNumber.toString();
 
 //3. boolean
 let bool: boolean = true;
-bool = false
+bool = false;
 
 //4.Array
 //기본 형태
-let arr: number[] = [1,2,3];
-let arr1:Array<number>=[4,5,6]; //이 방식은 제네릭에서 많이 사용
+let arr: number[] = [1, 2, 3];
+let arr1: Array<number> = [4, 5, 6]; //이 방식은 제네릭에서 많이 사용
 arr[3] = 10;
 //배열 원소의 타입들을 지정할 때
 // 배열의 원소가 string / boolean / number 중 하나면 된다
-let arr2:(string|boolean|number) [] = ['seoul',10];
+let arr2: (string | boolean | number)[] = ["seoul", 10];
 //5.튜플
 //튜플이라는 것은 배열의 인덱스와 요소의 타입을 정의해준 형식
 //배열의 길이와 원소 타입을 정하고 싶을 때
-//배열 길이=3 / 첫 째 원소는 숫자, 둘 째는 boolean,셋 째는 string이어야 
-let arr3:[number,boolean,string] = [5,false,'String']
+//배열 길이=3 / 첫 째 원소는 숫자, 둘 째는 boolean,셋 째는 string이어야
+let arr3: [number, boolean, string] = [5, false, "String"];
 //원소를 딱 정해서 줄 수도
-let arr4:[2,'Seoul','Lite'] = [2,'Seoul','Lite']; 
+let arr4: [2, "Seoul", "Lite"] = [2, "Seoul", "Lite"];
 //let arr5:[2,'Seoul','Lite'] = [2,'Seoul','김말쑥']; <- 'Lite'아닌 다른 값이 들어가서 오류 생김
 
 //6.Object
-let obj1:{a:number,b:string} = {a:10,b:'seoul'};
-let obj2:{a:number,b?:string} = {a:10}; // ?붙으면 해당값을 사용하지 않을수도 있다는 의미,따라서 b라는 값은 처음에 바로 값을 주지 않고 나중에 값을 줄 수도 있다.
+let obj1: { a: number; b: string } = { a: 10, b: "seoul" };
+let obj2: { a: number; b?: string } = { a: 10 }; // ?붙으면 해당값을 사용하지 않을수도 있다는 의미,따라서 b라는 값은 처음에 바로 값을 주지 않고 나중에 값을 줄 수도 있다.
 obj1.a = 77;
 
 //객체의 속성값을 변경못하게 하고 싶을때
-let obj3 :{a:number,b:string} = {a:2020,b:'not easy'} as const;
-obj3.a = 10000
+let obj3: { a: number; b: string } = { a: 2020, b: "not easy" } as const;
+obj3.a = 10000;
 
-//7.function 
+//7.function
 //매개변수와 return 값에 대한 타입을 지정해 놓아야
-const foo = (a:number,b:number): number =>{
-    return a+b
-}
+const foo = (a: number, b: number): number => {
+  return a + b;
+};
 
 //리턴값이 undefined라면 void를 명시해줘야
-const foo2 = (a:number,b:number):void =>{
-    console.log(a+b)
-}
-const fooo2 = (a:number,b:number):void =>{
-    return 
-}
+const foo2 = (a: number, b: number): void => {
+  console.log(a + b);
+};
+const fooo2 = (a: number, b: number): void => {
+  return;
+};
 
 //함수를 리턴값으로 가질 때
 // (c:string)=>string => 함수 foo3의 return 값이 (c:string)을 인수로 받고 string을 return하는 함수임을 명시
-const foo3 = (a:string,b:string):(c:string)=>string => {
-    return (c:string)=>{
-        return a+b
-    }
-}
+const foo3 = (a: string, b: string): ((c: string) => string) => {
+  return (c: string) => {
+    return a + b;
+  };
+};
 
 //함수 안의 함수가 다시 함수를 리턴할 때.이걸 보고 있으니 눈이 좀 아픈 것 같다
-const foo4 = (a:string,b:string):(c:string)=>(d:string)=>string => {
-    return (c:string)=>{
-        return (d:string)=>{
-            return d
-        }
-    }
-}
+const foo4 = (a: string, b: string): ((c: string) => (d: string) => string) => {
+  return (c: string) => {
+    return (d: string) => {
+      return d;
+    };
+  };
+};
 //객체의 method
-const obj4:{a:(b:string,c?:number)=>number } = {
-    //a라는 method는 (b,c)를 인자로 받고 number를 리턴하는 함수
-    a : (b:string,c?:number)=>{
-        return c ? c : 100
-    }
-}
+const obj4: { a: (b: string, c?: number) => number } = {
+  //a라는 method는 (b,c)를 인자로 받고 number를 리턴하는 함수
+  a: (b: string, c?: number) => {
+    return c ? c : 100;
+  },
+};
 
 //강제 형변환(남이 만들어놓은 타입을 내가 원하는 타입으로 바꾸고 싶을 때)
 const num: number = 10;
 
 //방법1-> 변수 선언 후 형변환시 () 안 붙임
-const newStr = num as unknown as string;//type:string으로 형변환 (바꾸려는 것과 바꾸고자 하는 것 사이에 어떤 부모-자식 관계도 없으면 as unknown붙여줘야)
+const newStr = (num as unknown) as string; //type:string으로 형변환 (바꾸려는 것과 바꾸고자 하는 것 사이에 어떤 부모-자식 관계도 없으면 as unknown붙여줘야)
 
-const div = document.createElement('div') //type: HTMLDivElement
+const div = document.createElement("div"); //type: HTMLDivElement
 const a1 = div as HTMLElement; //type:HTMLElement로 형변환 (바꾸려는 대상과 바꾸고자하는 것 사이의 부모-자식 사이면 as를 1번만 붙이면 된다)
 
 //방법2-> 변수 선언없이 형변환시 ()붙여서 실행
 const hello: boolean = false;
-(hello as unknown as string).substring(0);
-(<string><unknown>hello).substring(0);
+((hello as unknown) as string).substring(0);
+(<string>(<unknown>hello)).substring(0);
+
+// Union Type => |, 즉 js의 ||와 동일
+// 장점
+// 1.타입 가드(타입의 범위를 좁혀서 필터링하는 것)가능
+function logMsg(value: string | number) {
+  if (typeof value === "string") {
+    return value.toString();
+  }
+  if (typeof value === "number") {
+    return value.toLocaleString();
+  }
+  // str , number아니면 에러
+  throw new TypeError("Value must be string or number");
+}
+
+logMsg("2022년 호랑이해");
