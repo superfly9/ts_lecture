@@ -3,7 +3,7 @@
 //1.숫자
 let firstNumber = 3;
 let secondNumber;
-secondNumber = 10; //이건 ok
+secondNumber = 10; //옳은 타입 값으로 재할당,이건 ok
 //secondNumber = 'string'(x) 숫자가 들어가야
 //2.문자
 let str = 'Seoul';
