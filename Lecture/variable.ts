@@ -91,10 +91,15 @@ const hello: boolean = false;
 ((hello as unknown) as string).substring(0);
 (<string>(<unknown>hello)).substring(0);
 
-// Union Type => |, 즉 js의 ||와 동일
+// Union Type =>  |
+//1. 원시형에 사용시 -> js의 ||와 동일
+//2. 인터페이스에 사용 => 대상이 되는 인터페이스들의 공통 속성만 사용 가능, 그 외 속성 사용시 에러
+
 // 장점
 // 1.타입 가드(타입의 범위를 좁혀서 필터링하는 것)가능
-function logMsg(value: string | number) {
+
+type logParmas = string | number;
+function logMsg(value: logParmas) {
   if (typeof value === "string") {
     return value.toString();
   }
@@ -106,3 +111,42 @@ function logMsg(value: string | number) {
 }
 
 logMsg("2022년 호랑이해");
+// 2. 여러개의 인터페이스에 대해 동시에 유니언 타입을 쓰면 두 인터페이스의 공통 속성만 쓸 수 있다.
+interface Developer {
+  name: string;
+  skill: string;
+}
+interface Person {
+  name: string;
+  age: number;
+}
+type askParams = Developer | Person;
+
+//함수 내에서 매개변수에 대한 접근 가능한 속성과 함수 호출시의 접근 가능한 속성이 다르다
+function askSomeone(val: Developer | Person) {
+  let name = val.name;
+  // 함수 정의시 => 인자로 넘겨진 인터페이스에 공통적으로 있는 속성만 에러가 안 뜬다
+  // let skil = val.skil //  Property 'skil' does not exist on type 'Person
+  // let age =  val.age //  Property 'age' does not exist on type 'Developer'.
+}
+// 함수 호출시 => 인자로 넘겨진 타입 중 어떤 걸로 넘겨줘도 상관없다
+askSomeone({ name: "Meta", skill: "js" });
+askSomeone({ name: "Alphabet", age: 20 });
+
+// InterSection Type
+// 1. 원시 형에 대해 사용 => 대상이 되는 변수들의 공통인 특징
+// 2. 인터페이스에 사용 => 대상이 되는 인터페이스의 모든 요소를 포함하는 타입으로 쓸 수 있다.
+
+type Params = Developer & Person; // 2에 해당하는 경우, Intersection Type + 대상이 되는 인터페이스들의 모든 속성 사용가능
+function askSomeone2(val: Params) {
+  // 함수 정의시 => 인자로 넘겨진 인터페이스에 있는 속성이면 에러가 안 뜬다
+  let name = val.name;
+  let skill = val.skill;
+  let age = val.age;
+}
+
+//아래와 같이 호출 하면 에러
+// askSomeone2({ name: "Meta", skil: "js" });
+// askSomeone2({ name: "Alphabet", age: 20 });
+
+askSomeone2({ name: "Alphabet", skill: "CSS", age: 20 });

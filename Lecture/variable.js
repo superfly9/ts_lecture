@@ -92,3 +92,8 @@ function logMsg(value) {
     throw new TypeError("Value must be string or number");
 }
 logMsg("2022년 호랑이해");
+function askSomeone(val) {
+    let name = val.name; // 인자로 넘겨진 인터페이스 모두에 있는 값만 에러가 안 뜬다
+    // let skil = val.skil //  Property 'skil' does not exist on type 'Person
+    // let age =  val.age //  Property 'age' does not exist on type 'Developer'.
+}

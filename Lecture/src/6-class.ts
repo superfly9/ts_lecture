@@ -34,6 +34,8 @@ class People extends Person {
 // private   => 상속받은 쪽/외부객체 모두에서 접근 불가, #키워드 붙여도 private 변수됨(최근 js에서 채택, ex) person.#name)
 // ts에서는 안헷갈리게 private쓰자
 
+// 강도 private > protected > public
+
 //3. static => 인스턴스 아닌 클래스 통해 접근해야
 class Seoul {
   //static keyword => constructor안에서 정의하면 오류뜬다
